@@ -8,13 +8,8 @@ class PageCell: UICollectionViewCell {
             guard let page = page else {
                 return
             }
-            
-            var imageName = page.imageName
-            if UIDevice.current.orientation.isLandscape {
-                imageName += "_landscape"
-            }
-            
-            imageView.image = UIImage(named: imageName)
+            backgroundColor = UIColor(r: CGFloat(page.r), g: CGFloat(page.g), b: CGFloat(page.b))
+            card.backgroundColor = UIColor(r: CGFloat(page.r - 14), g: CGFloat(page.g - 14), b: CGFloat(page.b - 14))
             
             let attributedText = NSMutableAttributedString(string: page.title, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 20, weight: UIFontWeightMedium), NSForegroundColorAttributeName: UIColor.white])
             
@@ -36,11 +31,11 @@ class PageCell: UICollectionViewCell {
         setupViews()
     }
     
-    let imageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
-        iv.clipsToBounds = true
-        return iv
+    let card: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 250, height: 250))
+        view.layer.cornerRadius = view.frame.size.width/2
+        view.layer.masksToBounds = true
+        return view
     }()
     
     let textView: UITextView = {
@@ -58,11 +53,14 @@ class PageCell: UICollectionViewCell {
     }()
     
     func setupViews() {
-        addSubview(imageView)
+        addSubview(card)
         addSubview(textView)
         addSubview(lineSeparatorView)
         
-        imageView.anchor(topAnchor, left: leftAnchor, bottom: textView.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0)
+        card.anchor(topAnchor, left: nil, bottom: nil, right: nil, topConstant: 100, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 250, heightConstant: 250)
+        let cardCenterConstraintsX = NSLayoutConstraint(item: card, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
+        card.translatesAutoresizingMaskIntoConstraints = false
+        addConstraints([cardCenterConstraintsX])
         
         textView.anchor(nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0)
         
@@ -78,6 +76,12 @@ class PageCell: UICollectionViewCell {
     
 }
 
+extension UIColor {
+    var components: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)? {
+        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        return getRed(&r, green: &g, blue: &b, alpha: &a) ? (r,g,b,a) : nil
+    }
+}
 
 
 
