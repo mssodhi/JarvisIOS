@@ -30,6 +30,11 @@ class TabsController: UITabBarController, UITabBarControllerDelegate {
         self.present(optionMenu, animated: true, completion: nil)
     }
     
+    func handleCam() {
+        let view = CamViewController()
+        self.present(view, animated: true, completion: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
@@ -41,28 +46,32 @@ class TabsController: UITabBarController, UITabBarControllerDelegate {
         let tabTwoBarItem2 = UITabBarItem(tabBarSystemItem: .mostRecent, tag: 0)
         tabTwo.tabBarItem = tabTwoBarItem2
         
-        self.viewControllers = [tabOne, tabTwo]
+        let tabThree = CamViewController()
+        let tabTwoBarItem3 = UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
+        tabThree.tabBarItem = tabTwoBarItem3
+        
+        self.viewControllers = [tabOne, tabTwo, tabThree]
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(handleSettings))
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Camera", style: .plain, target: self, action: #selector(handleCam))
+        
     }
     
-//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-//        switch viewController {
-//        
-//        // show settings on home
-//        case is HomeController:
-//            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(handleSettings))
-//            break
-//        // hide settings on test
-//        case is TestViewController:
-//            self.navigationItem.leftBarButtonItem?.isEnabled = false
-//            self.navigationItem.leftBarButtonItem?.title = ""
-//            break
-//            
-//        default:
-//            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(handleSettings))
-//        }
-//    }
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        switch viewController {
+        
+        case is HomeController:
+            self.navigationController?.isNavigationBarHidden = false
+            break
+
+        case is CamViewController:
+            self.navigationController?.isNavigationBarHidden = true
+            break
+            
+        default:
+            self.navigationController?.isNavigationBarHidden = false
+        }
+    }
     
 }
