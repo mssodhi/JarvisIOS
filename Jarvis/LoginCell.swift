@@ -26,7 +26,7 @@ class LoginCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        backgroundColor = darkBackgorund
         addSubview(logoImageView)
         addSubview(loginButton)
         

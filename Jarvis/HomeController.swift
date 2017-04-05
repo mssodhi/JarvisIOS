@@ -6,7 +6,7 @@ let primaryOrange = UIColor(r: 255, g: 99, b: 71)
 let brightLightBlue = UIColor(r: 124, g: 222, b: 240)
 let darkBackgorund = UIColor(r: 34, g: 34, b: 34)
 
-class HomeController: UIViewController, SFSpeechRecognizerDelegate {
+class HomeController: UINavigationController, SFSpeechRecognizerDelegate {
     
     public var speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
     public var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -34,9 +34,6 @@ class HomeController: UIViewController, SFSpeechRecognizerDelegate {
     lazy var refreshButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 5
-        //        button.layer.borderColor = primaryOrange.cgColor
-        //        button.layer.borderWidth = 1
-        
         button.setTitle("Refresh", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.setTitleColor(primaryOrange, for: .normal)
@@ -48,11 +45,7 @@ class HomeController: UIViewController, SFSpeechRecognizerDelegate {
     lazy var speakButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = primaryOrange
-        
         button.layer.cornerRadius = 5
-        //        button.layer.borderColor = UIColor.white.cgColor
-        //        button.layer.borderWidth = 1
-        
         button.setTitle("Speak", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 25, weight: UIFontWeightThin)
         button.setTitleColor(.white, for: .normal)

@@ -36,7 +36,6 @@ class TestViewController: UIViewController {
     lazy var directMessageButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "Rockefeller").withRenderingMode(.alwaysOriginal), for: .normal)
-        button.addTarget(self, action: #selector(handleSignOut), for: .touchUpInside)
         return button
     }()
 
@@ -89,12 +88,5 @@ class TestViewController: UIViewController {
         
         directMessageButton.anchor(directMessageButtonContainerView.topAnchor, left: directMessageButtonContainerView.leftAnchor, bottom: directMessageButtonContainerView.bottomAnchor, right: directMessageButtonContainerView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
-    
-    
-    func handleSignOut() {
-        UserDefaults.standard.setIsLoggedIn(value: false)
-        
-        let loginController = LoginController()
-        present(loginController, animated: true, completion: nil)
-    }
+
 }

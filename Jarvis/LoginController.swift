@@ -22,11 +22,11 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     let loginCellId = "loginCellId"
     
     let pages: [Page] = {
-        let firstPage = Page(title: "Share a great listen", message: "It's free to send your books to the people in your life. Every recipient's first book is on us.", imageName: "page1", r: 65, g: 169, b: 204)
+        let firstPage = Page(title: "Natural Voice Commands", message: "Jarvis easily understands every day language to help you with your daily taks", imageName: "page1", r: 65, g: 169, b: 204)
         
-        let secondPage = Page(title: "Send from your library", message: "Tap the More menu next to any book. Choose \"Send this Book\"", imageName: "page2", r: 225, g: 97, b: 93)
+        let secondPage = Page(title: "Customizable", message: "You can easily add, remove, and enable, or disable any specific functionality", imageName: "page2", r: 225, g: 97, b: 93)
         
-        let thirdPage = Page(title: "Send from the player", message: "Tap the More menu in the upper corner. Choose \"Send this Book\"", imageName: "page3", r: 253, g: 189, b: 87)
+        let thirdPage = Page(title: "Easy To Use", message: "Jarvis is the first of it kind in AI systems which puts user experience first", imageName: "page3", r: 253, g: 189, b: 87)
         
         return [firstPage, secondPage, thirdPage]
     }()
@@ -191,7 +191,7 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
         let rootViewController = UIApplication.shared.keyWindow?.rootViewController
         guard let mainNavigationController = rootViewController as? MainNavigationController else { return }
         
-        mainNavigationController.viewControllers = [TabsController()]
+        mainNavigationController.present(TabsController(), animated: false, completion: nil)
         
         UserDefaults.standard.setIsLoggedIn(value: true)
         
