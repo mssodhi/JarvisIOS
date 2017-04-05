@@ -35,14 +35,14 @@ class CamViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         return button
     }()
     
-//    let dismissButton: UIButton = {
-//        let button = UIButton()
-//        button.backgroundColor = .clear
-//        let image = #imageLiteral(resourceName: "cancel_icon")
-//        button.setImage(image, for: .normal)
-//        button.addTarget(self, action: #selector(onDismiss), for: .touchUpInside)
-//        return button
-//    }()
+    let flipCamera: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .clear
+        let image = #imageLiteral(resourceName: "camera_rotate_icon")
+        button.setImage(image, for: .normal)
+        button.addTarget(self, action: #selector(toggleCam), for: .touchUpInside)
+        return button
+    }()
     
     func onCapture() {
         UIView.animate(withDuration: 0.05, animations: {
@@ -88,18 +88,17 @@ class CamViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     }
     
     func onDismiss() {
-        navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         view.backgroundColor = .clear
 
-//        view.addSubview(dismissButton)
-//        dismissButton.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 10, leftConstant: 2, bottomConstant: 0, rightConstant: 0, widthConstant: 50, heightConstant: 50)
+        view.addSubview(flipCamera)
+        flipCamera.anchor(view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, topConstant: 10, leftConstant: 0, bottomConstant: 0, rightConstant: 2, widthConstant: 50, heightConstant: 50)
 
         view.addSubview(captureButton)
-        captureButton.anchor(nil, left: nil, bottom: view.bottomAnchor, right: nil, topConstant: 0, leftConstant: 0, bottomConstant: 75, rightConstant: 0, widthConstant: 75, heightConstant: 75)
+        captureButton.anchor(nil, left: nil, bottom: view.bottomAnchor, right: nil, topConstant: 0, leftConstant: 0, bottomConstant: 25, rightConstant: 0, widthConstant: 75, heightConstant: 75)
         let captureButtonCenterXConstraint = NSLayoutConstraint(item: captureButton, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
         captureButton.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints([captureButtonCenterXConstraint])

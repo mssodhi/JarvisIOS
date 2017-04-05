@@ -45,7 +45,6 @@ class CapturedImageView: UIViewController {
     }
     
     func cancel() {
-        self.navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
 
