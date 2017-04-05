@@ -31,8 +31,7 @@ class TabsController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func handleCam() {
-        let view = CamViewController()
-        self.present(view, animated: true, completion: nil)
+        self.present(CamViewController(), animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

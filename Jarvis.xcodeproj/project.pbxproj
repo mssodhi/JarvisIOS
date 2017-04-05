@@ -12,6 +12,7 @@
 		727E20571E9439B600092405 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727E20561E9439B600092405 /* TestViewController.swift */; };
 		727E20591E943AC600092405 /* JarvisServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727E20581E943AC600092405 /* JarvisServices.swift */; };
 		727E205B1E947AC300092405 /* CamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727E205A1E947AC300092405 /* CamViewController.swift */; };
+		727E205F1E94B6AC00092405 /* CapturedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727E205E1E94B6AC00092405 /* CapturedImageView.swift */; };
 		72CD08C21E9434CF0052B980 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CD08C11E9434CF0052B980 /* AppDelegate.swift */; };
 		72CD08CA1E9434CF0052B980 /* Jarvis.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72CD08C81E9434CF0052B980 /* Jarvis.xcdatamodeld */; };
 		72CD08CC1E9434CF0052B980 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72CD08CB1E9434CF0052B980 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		727E20561E9439B600092405 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		727E20581E943AC600092405 /* JarvisServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JarvisServices.swift; sourceTree = "<group>"; };
 		727E205A1E947AC300092405 /* CamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CamViewController.swift; sourceTree = "<group>"; };
+		727E205E1E94B6AC00092405 /* CapturedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapturedImageView.swift; sourceTree = "<group>"; };
 		72CD08BE1E9434CF0052B980 /* Jarvis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jarvis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72CD08C11E9434CF0052B980 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72CD08C91E9434CF0052B980 /* Jarvis.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Jarvis.xcdatamodel; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				727E20561E9439B600092405 /* TestViewController.swift */,
 				727E20581E943AC600092405 /* JarvisServices.swift */,
 				727E205A1E947AC300092405 /* CamViewController.swift */,
+				727E205E1E94B6AC00092405 /* CapturedImageView.swift */,
 			);
 			path = Jarvis;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				72CD08E11E9436CF0052B980 /* PageCell.swift in Sources */,
 				72CD08E31E9436D90052B980 /* LoginCell.swift in Sources */,
 				72CD08C21E9434CF0052B980 /* AppDelegate.swift in Sources */,
+				727E205F1E94B6AC00092405 /* CapturedImageView.swift in Sources */,
 				727E20551E9438A800092405 /* HomeController+speech.swift in Sources */,
 				72CD08CA1E9434CF0052B980 /* Jarvis.xcdatamodeld in Sources */,
 			);

@@ -35,14 +35,14 @@ class CamViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         return button
     }()
     
-    let dismissButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .clear
-        let image = #imageLiteral(resourceName: "cancel_icon")
-        button.setImage(image, for: .normal)
-        button.addTarget(self, action: #selector(onDismiss), for: .touchUpInside)
-        return button
-    }()
+//    let dismissButton: UIButton = {
+//        let button = UIButton()
+//        button.backgroundColor = .clear
+//        let image = #imageLiteral(resourceName: "cancel_icon")
+//        button.setImage(image, for: .normal)
+//        button.addTarget(self, action: #selector(onDismiss), for: .touchUpInside)
+//        return button
+//    }()
     
     func onCapture() {
         UIView.animate(withDuration: 0.05, animations: {
@@ -69,41 +69,41 @@ class CamViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         
         if let error = error {
             print(error.localizedDescription)
+            return
         }
         
         if let sampleBuffer = photoSampleBuffer, let previewBuffer = previewPhotoSampleBuffer, let dataImage = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: sampleBuffer, previewPhotoSampleBuffer: previewBuffer) {
             
             if (UIImage(data: dataImage)) != nil {
-                let image = UIImage(data: dataImage)
                 let view = UIImageView()
-                view.image = image
+                view.image = UIImage(data: dataImage)
                 if currentDevice.position == .front {
-                    view.transform = CGAffineTransform(scaleX: -1, y: 1)
+                    view.transform = CGAffineTransform(scaleX: -1.33, y: 1)
+                } else {
+                    view.transform = CGAffineTransform(scaleX: 1.33, y: 1)
                 }
-                self.view.addSubview(view)
-                view.anchor(self.view.topAnchor, left: self.view.leftAnchor, bottom: nil, right: nil, topConstant: 300, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 75, heightConstant: 150)
+                present(CapturedImageView.init(view: view), animated: true, completion: nil)
             }
         }
     }
     
     func onDismiss() {
-        print("Dismiss")
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
-        
+        view.backgroundColor = .clear
+
+//        view.addSubview(dismissButton)
+//        dismissButton.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 10, leftConstant: 2, bottomConstant: 0, rightConstant: 0, widthConstant: 50, heightConstant: 50)
+
         view.addSubview(captureButton)
-        view.addSubview(dismissButton)
-        
         captureButton.anchor(nil, left: nil, bottom: view.bottomAnchor, right: nil, topConstant: 0, leftConstant: 0, bottomConstant: 75, rightConstant: 0, widthConstant: 75, heightConstant: 75)
-        
         let captureButtonCenterXConstraint = NSLayoutConstraint(item: captureButton, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
         captureButton.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints([captureButtonCenterXConstraint])
         
-        dismissButton.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 10, leftConstant: 2, bottomConstant: 0, rightConstant: 0, widthConstant: 50, heightConstant: 50)
 
         let tap = UITapGestureRecognizer()
         tap.numberOfTapsRequired = 2
@@ -111,8 +111,11 @@ class CamViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(tap)
         
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeDown.direction = UISwipeGestureRecognizerDirection.down
+        self.view.addGestureRecognizer(swipeDown)
+        
         super.viewDidLoad()
-        view.backgroundColor = .clear
         load()
     }
     
@@ -157,5 +160,24 @@ class CamViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             }
         }
     }
+    
+    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.right:
+                print("Swiped right")
+            case UISwipeGestureRecognizerDirection.down:
+                print("Swiped down")
+                onDismiss()
+            case UISwipeGestureRecognizerDirection.left:
+                print("Swiped left")
+            case UISwipeGestureRecognizerDirection.up:
+                print("Swiped up")
+            default:
+                break
+            }
+        }
+    }
+
     
 }
